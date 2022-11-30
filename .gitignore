@@ -1,3 +1,7 @@
+# Ignore backend files
 backend/elasticsearch-data/
 backend/mysql-data/
 backend/redis-cache/
+
+# Ignore app files
+app/nginx-data/
