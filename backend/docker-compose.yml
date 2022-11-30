@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8
+    volumes:
+      - ./mysql-data:/var/lib/mysql
+    expose:
+      - 3306
+      - 33060
+    environment:
+      - MYSQL_ROOT_PASSWORD=adminadminadmin
+    networks:
+      - internal
+
+  redis:
+    image: redis:6.2
+    volumes:
+      - ./redis-cache:/data
+    networks:
+      - internal
+    expose:
+      - 3000
+
+  elasticsearch:
+    image: elasticsearch:7.17.7
+    environment:
+      - "discovery.type=single-node"
+      - "bootstrap.memory_lock=true"
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    volumes:
+      - ./elasticsearch-data:/usr/share/elasticsearch/data
+    networks:
+      - internal
+    expose:
+      - 9200
+      - 9300
+
+networks:
+  internal:
+    driver: bridge
