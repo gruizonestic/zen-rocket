@@ -36,6 +36,16 @@ services:
       - 9200
       - 9300
 
+  nginx:
+    image: nginx:1.20
+    volumes:
+      - ./nginx-data:/etc/nginx
+    networks:
+      - internal
+    expose:
+      - 8080
+      - 80
+
 networks:
   internal:
     name: internal

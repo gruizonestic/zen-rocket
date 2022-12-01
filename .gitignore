@@ -1,7 +1,5 @@
-# Ignore backend files
-backend/elasticsearch-data/
-backend/mysql-data/
-backend/redis-cache/
-
-# Ignore app files
-app/nginx-data/
+# Ignore files
+magento2/elasticsearch-data/
+magento2/mysql-data/
+magento2/redis-cache/
+magento2/nginx-data/
