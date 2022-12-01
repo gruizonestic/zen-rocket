@@ -12,6 +12,9 @@ services:
       - MYSQL_ROOT_PASSWORD=adminadminadmin
     networks:
       - internal
+    ports:
+      - 3306:3306
+      - 33060:33060
 
   redis:
     image: redis:6.2
@@ -35,9 +38,12 @@ services:
     expose:
       - 9200
       - 9300
+    ports:
+      - 9200:9200
+      - 9300:9300
 
   nginx:
-    image: nginx:1.20
+    image: nginx:1.18
     volumes:
       - ./nginx-data:/etc/nginx
     networks:
@@ -45,6 +51,9 @@ services:
     expose:
       - 8080
       - 80
+    ports:
+      - 80:80
+      - 8080:8080
 
 networks:
   internal:
