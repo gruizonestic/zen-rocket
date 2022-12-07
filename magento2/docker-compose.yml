@@ -9,7 +9,10 @@ services:
       - 3306
       - 33060
     environment:
-      - MYSQL_ROOT_PASSWORD=adminadminadmin
+      - MYSQL_ROOT_PASSWORD=admin
+      - MYSQL_DATABASE=magento
+      - MYSQL_USER=magento
+      - MYSQL_PASSWORD=magento
     networks:
       - internal
     ports:
@@ -54,6 +57,19 @@ services:
     ports:
       - 80:80
       - 8080:8080
+
+  rabbit:
+    image: rabbitmq:3.9-management
+    hostname: my-rabbit
+    volumes:
+      - ./rabbit-data:/var/lib/rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
+    expose:
+      - 5672
+    networks:
+      - internal
 
 networks:
   internal:

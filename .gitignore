@@ -3,3 +3,4 @@ magento2/elasticsearch-data/
 magento2/mysql-data/
 magento2/redis-cache/
 magento2/nginx-data/
+magento2/rabbit-data/
