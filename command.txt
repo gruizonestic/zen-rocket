@@ -1,0 +1,20 @@
+bin/magento setup:install \
+--base-url=http://127.0.0.1/magento2 \
+--db-host=localhost \
+--db-name=magento \
+--db-user=magento \
+--db-password=magento \
+--admin-firstname=guille \
+--admin-lastname=onestic \
+--admin-email=guillermo.ruiz@onestic.com \
+--admin-user=admin \
+--admin-password=admin123 \
+--language=en_US \
+--currency=EUR \
+--timezone=Europe/Madrid \
+--use-rewrites=1 \
+--search-engine=elasticsearch7 \
+--elasticsearch-host=localhost \
+--elasticsearch-port=9200 \
+--elasticsearch-index-prefix=magento2 \
+--elasticsearch-timeout=15

@@ -62,7 +62,7 @@ Nos devuelve un JSON con los parámetros del clúster (de una única máquina).
 
 Instalar PHP 8.1, PHP-fpm y todos los módulos que necesita magento.
 ```sh
-sudo apt install php php-fpm php8.1-bcmath php8.1-curl php8.1-xml php8.1-gd php8.1-intl php8.1-mbstring php8.1-mysql php8.1-soap 
+sudo apt install php php-fpm php8.1-bcmath php8.1-curl php8.1-xml php8.1-gd php8.1-intl php8.1-mbstring php8.1-mysql php8.1-soap php8.1-zip
 ```
 
 Editamos los dos ficheros de configuración de php y php-fpm con la misma configuración:
@@ -93,5 +93,37 @@ Reiniciamos el servicio de php-fpm
 systemctl restart php8.1-fpm
 ```
 
+## Instalación local de composer.
+
+Para instalar composer abrimos una terminal, navegamos al directorio de instalación que queramos y ejecutamos los siguientes comandos.
+```sh
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+```
+```sh
+php -r "if (hash_file('sha384', 'composer-setup.php') === '55ce33d7678c5a611085589f1f3ddf8b3c52d662cd01d4ba75c0ee0459970c2200a51f492d557530c71c15d8dba01eae') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+```
+```sh
+php composer-setup.php
+```
+```sh
+php -r "unlink('composer-setup.php');"
+```
+Opcionalmente, movemos el ejecutable a ```/usr/local/bin/composer ``` y así lo tendremos disponible en el PATH para poder llamarlo desde cualquier directorio.
+
+```sh
+sudo mv composer.phar /usr/local/bin/composer
+```
+
+## Instalación local de magento base.
+
+Abrimos una terminal y ejecutamos:
+```sh
+composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition /ruta/donde/queremos/instalar/magento 
+```
+> Nos pedirá usuario y contraseña para instalar magento. 
+
+Especificamos los permisos necesarios para que magento pueda escribir en el sistema de ficheros. 
+
+cd /var/www/html/<ruta donde hemos instalado magento>
 
 

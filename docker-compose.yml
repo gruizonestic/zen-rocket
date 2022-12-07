@@ -71,6 +71,19 @@ services:
     networks:
       - internal
 
+  php:
+    build: .
+    depends_on:
+      - mysql
+      - redis
+      - elasticsearch
+      - rabbit
+      # - nginx
+    volumes:
+      - ./php-data:/root
+    networks:
+      - internal
+
 networks:
   internal:
     name: internal
