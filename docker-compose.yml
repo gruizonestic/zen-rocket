@@ -3,6 +3,7 @@ version: '3.8'
 services:
   mysql:
     image: mysql:8
+    container_name: mysql
     volumes:
       - ./mysql-data:/var/lib/mysql
     expose:
@@ -21,6 +22,7 @@ services:
 
   redis:
     image: redis:6.2
+    container_name: redis
     volumes:
       - ./redis-cache:/data
     networks:
@@ -30,6 +32,7 @@ services:
 
   elasticsearch:
     image: elasticsearch:7.17.7
+    container_name: elastic
     environment:
       - "discovery.type=single-node"
       - "bootstrap.memory_lock=true"
@@ -46,9 +49,12 @@ services:
       - 9300:9300
 
   nginx:
-    image: nginx:1.18
+    build: ./nginx-docker
+    container_name: nginx
+    depends_on:
+      - php
     volumes:
-      - ./nginx-data:/etc/nginx
+      - shared-volume:/var/www/html
     networks:
       - internal
     expose:
@@ -60,6 +66,7 @@ services:
 
   rabbit:
     image: rabbitmq:3.9-management
+    container_name: rabbit
     hostname: my-rabbit
     volumes:
       - ./rabbit-data:/var/lib/rabbitmq
@@ -70,21 +77,30 @@ services:
       - 5672
     networks:
       - internal
+    environment:
+      - RABBITMQ_DEFAULT_USER=magento
+      - RABBITMQ_DEFAULT_PASS=magento
 
   php:
     build: .
+    container_name: php
     depends_on:
       - mysql
       - redis
       - elasticsearch
       - rabbit
-      # - nginx
     volumes:
-      - ./php-data:/root
+      - shared-volume:/var/www/html
     networks:
       - internal
-
+    expose:
+      - 9000
+    ports:
+      - 9000:9000
 networks:
   internal:
     name: internal
     driver: bridge
+
+volumes:
+  shared-volume:
