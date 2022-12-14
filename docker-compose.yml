@@ -58,11 +58,9 @@ services:
     networks:
       - internal
     expose:
-      - 8080
       - 80
     ports:
       - 80:80
-      - 8080:8080
 
   rabbit:
     image: rabbitmq:3.9-management

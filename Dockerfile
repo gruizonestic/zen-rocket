@@ -9,5 +9,4 @@ RUN composer create-project --repository-url=https://repo.magento.com/ magento/p
 COPY ./install-magento.sh /usr/src/
 RUN chmod +x /usr/src/install-magento.sh
 COPY auth.json /var/www/html/var/composer_home/
-RUN ./install-magento.sh
 

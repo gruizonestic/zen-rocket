@@ -21,7 +21,7 @@ Nuestro cliente ficticio ACME, SA nos ha pedido que dockerizemos el entorno de t
 - Se va a levantar un contenedor por cada servicio que necesita Magento para funcionar.
 - Las imágenes de estos contenedores son imágenes oficiales lo más optimizadas posibles. 
 
-## Ejecución
+## Ejecución de los contenedores
 
 Clonar el repositorio en un directorio local.
 ```sh
@@ -35,4 +35,17 @@ Poner en marcha los contenedores
 ```sh
 docker compose up -d 
 ```
+## Instalación de magento
 
+Accedemos al contenedor de php-fpm ejecutando desde un terminal
+```sh
+docker exec -it php bash
+```
+Y una vez dentro, lanzamos el script de instalación de magento con el sample data.
+```sh
+/usr/src/install-magento.sh
+```
+
+## Post-instalación
+
+Accede a http://localhost y comprueba que ves la página por defecto de LUMA.
