@@ -1,4 +1,4 @@
-# Ignore files
+# Ignore folders
 elasticsearch-data/
 mysql-data/
 redis-cache/
@@ -6,3 +6,6 @@ nginx-data/
 rabbit-data/
 magento2/
 php-data/
+
+# Ignore files
+auth.json
